@@ -36,10 +36,7 @@
         left: 10px;
         color: white;
         font-size: 24px;
-        display: none;
-    }
-
-    /* Кнопки для мобільного */
+        display:
     #controls {
         position: absolute;
         bottom: 20px;
@@ -76,7 +73,7 @@
 
 <div id="score">Очки: 0</div>
 
-<!-- КНОПКИ ДЛЯ ТЕЛЕФОНА -->
+
 <div id="controls">
     <div class="ctrl-btn" id="btnLeft">←</div>
     <div class="ctrl-btn" id="btnRight">→</div>
@@ -90,7 +87,7 @@ const ctx = canvas.getContext("2d");
 
 let player, enemies, enemySpeed, keys, score, gameOverState;
 
-// -------------------- СТАРТ ГРИ --------------------
+
 function startGame() {
     document.getElementById("menu").style.display = "none";
     document.getElementById("gameOver").style.display = "none";
@@ -104,11 +101,11 @@ function startGame() {
     score = 0;
     gameOverState = false;
 
-    // Управління клавіатурою
+    
     document.onkeydown = (e) => keys[e.key] = true;
     document.onkeyup = (e) => keys[e.key] = false;
 
-    // Управління сенсорними кнопками
+    
     document.getElementById("btnLeft").ontouchstart = () => keys["left"] = true;
     document.getElementById("btnLeft").ontouchend = () => keys["left"] = false;
 
@@ -120,7 +117,7 @@ function startGame() {
     requestAnimationFrame(gameLoop);
 }
 
-// -------------------- ВОРОЖІ МАШИНИ --------------------
+
 function spawnEnemy() {
     if (gameOverState) return;
     const lane = Math.floor(Math.random() * 3);
@@ -207,4 +204,5 @@ function gameLoop() {
 </script>
 
 </body>
+
 </html>
