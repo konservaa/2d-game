@@ -66,12 +66,12 @@
     <button onclick="startGame()">Старт</button>
 </div>
 <div id="gameOver" style="display:none;">
-    <h1>Гру закінчено</h1>
+    <h1>Вам не пощастило.Нажаль для вас гру закінчено(((</h1>
     <p id="finalScore"></p>
     <button onclick="startGame()">Грати знову</button>
 </div>
 
-<div id="score">Очки: 0</div>
+<div id="score">Ваші очки: 0</div>
  <div id="controls">
  <div class="ctrl-btn" id="btnLeft">←</div>
  <div class="ctrl-btn" id="btnRight">→</div>
@@ -110,8 +110,8 @@ function startGame() {
     setInterval(spawnEnemy, 1000);
 
     requestAnimationFrame(gameLoop);
+    
 }
-
 function spawnEnemy() {
     if (gameOverState) return;
     const lane = Math.floor(Math.random() * 3);
@@ -122,7 +122,6 @@ function spawnEnemy() {
         height: 80
     });
 }
-
 function updatePlayer() {
 
     if ((keys["ArrowLeft"] || keys["a"] || keys["A"]) && player.x > 20) {
@@ -134,7 +133,6 @@ function updatePlayer() {
     if (keys["left"] && player.x > 20) player.x -= player.speed;
     if (keys["right"] && player.x < 340) player.x += player.speed;
 }
-
 function checkCollisions() {
     for (let e of enemies) {
         if (
@@ -147,7 +145,6 @@ function checkCollisions() {
         }
     }
 }
-
 function endGame() {
     gameOverState = true;
     document.getElementById("score").style.display = "none";
@@ -155,12 +152,10 @@ function endGame() {
     document.getElementById("finalScore").innerText = "Ваш рахунок: " + score;
     document.getElementById("gameOver").style.display = "block";
 }
-
 function drawPlayer() {
     ctx.fillStyle = "cyan";
     ctx.fillRect(player.x, player.y, player.width, player.height);
 }
-
 function drawEnemies() {
     ctx.fillStyle = "red";
     enemies.forEach(e => {
@@ -174,7 +169,6 @@ function drawEnemies() {
         }
     });
 }
-
 function gameLoop() {
     if (gameOverState) return;
 
@@ -188,7 +182,6 @@ function gameLoop() {
     requestAnimationFrame(gameLoop);
 }
 </script>
-
 </body>
-
 </html>
+
