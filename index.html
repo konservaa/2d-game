@@ -2,7 +2,7 @@
 <html lang="uk">
 <head>
 <meta charset="UTF-8" />
-<title>Гоночна мінігра</title>
+<title>Гоночна 2Д-мінігра</title>
 <style>
     body {
         margin: 0;
@@ -38,8 +38,6 @@
         font-size: 24px;
         display: none;
     }
-
-    /* Кнопки для мобільного */
     #controls {
         position: absolute;
         bottom: 20px;
@@ -67,7 +65,6 @@
     <h1>Гоночна мінігра</h1>
     <button onclick="startGame()">Старт</button>
 </div>
-
 <div id="gameOver" style="display:none;">
     <h1>Гру закінчено</h1>
     <p id="finalScore"></p>
@@ -75,11 +72,9 @@
 </div>
 
 <div id="score">Очки: 0</div>
-
-<!-- КНОПКИ ДЛЯ ТЕЛЕФОНА -->
-<div id="controls">
-    <div class="ctrl-btn" id="btnLeft">←</div>
-    <div class="ctrl-btn" id="btnRight">→</div>
+ <div id="controls">
+ <div class="ctrl-btn" id="btnLeft">←</div>
+ <div class="ctrl-btn" id="btnRight">→</div>
 </div>
 
 <canvas id="game" width="400" height="600"></canvas>
@@ -90,7 +85,6 @@ const ctx = canvas.getContext("2d");
 
 let player, enemies, enemySpeed, keys, score, gameOverState;
 
-// -------------------- СТАРТ ГРИ --------------------
 function startGame() {
     document.getElementById("menu").style.display = "none";
     document.getElementById("gameOver").style.display = "none";
@@ -104,11 +98,9 @@ function startGame() {
     score = 0;
     gameOverState = false;
 
-    // Управління клавіатурою
     document.onkeydown = (e) => keys[e.key] = true;
     document.onkeyup = (e) => keys[e.key] = false;
 
-    // Управління сенсорними кнопками
     document.getElementById("btnLeft").ontouchstart = () => keys["left"] = true;
     document.getElementById("btnLeft").ontouchend = () => keys["left"] = false;
 
@@ -120,7 +112,6 @@ function startGame() {
     requestAnimationFrame(gameLoop);
 }
 
-// -------------------- ВОРОЖІ МАШИНИ --------------------
 function spawnEnemy() {
     if (gameOverState) return;
     const lane = Math.floor(Math.random() * 3);
@@ -132,23 +123,18 @@ function spawnEnemy() {
     });
 }
 
-// -------------------- ОНОВЛЕННЯ ГРАВЦЯ --------------------
 function updatePlayer() {
 
-    // Клавіатура
     if ((keys["ArrowLeft"] || keys["a"] || keys["A"]) && player.x > 20) {
         player.x -= player.speed;
     }
     if ((keys["ArrowRight"] || keys["d"] || keys["D"]) && player.x < 340) {
         player.x += player.speed;
     }
-
-    // Сенсорні кнопки
     if (keys["left"] && player.x > 20) player.x -= player.speed;
     if (keys["right"] && player.x < 340) player.x += player.speed;
 }
 
-// -------------------- ЗІТКНЕННЯ --------------------
 function checkCollisions() {
     for (let e of enemies) {
         if (
@@ -162,7 +148,6 @@ function checkCollisions() {
     }
 }
 
-// -------------------- КІНЕЦЬ ГРИ --------------------
 function endGame() {
     gameOverState = true;
     document.getElementById("score").style.display = "none";
@@ -171,7 +156,6 @@ function endGame() {
     document.getElementById("gameOver").style.display = "block";
 }
 
-// -------------------- МАЛЮВАННЯ --------------------
 function drawPlayer() {
     ctx.fillStyle = "cyan";
     ctx.fillRect(player.x, player.y, player.width, player.height);
@@ -191,7 +175,6 @@ function drawEnemies() {
     });
 }
 
-// -------------------- ІГРОВИЙ ЦИКЛ --------------------
 function gameLoop() {
     if (gameOverState) return;
 
@@ -207,4 +190,5 @@ function gameLoop() {
 </script>
 
 </body>
+
 </html>
